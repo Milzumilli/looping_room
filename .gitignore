@@ -1,0 +1,15 @@
+**/Library/
+
+Temp/
+
+Obj/
+
+Build/ ja Builds/
+
+Logs/
+
+UserSettings/
+
+.vs/
+
+*.csproj, *.sln, 
