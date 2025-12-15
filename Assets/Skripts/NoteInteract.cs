@@ -19,6 +19,8 @@ public class NoteInteract : MonoBehaviour
         {
             playerInRange = false;
             UIManager.Instance.HideInteraction();
+
+            UIManager.Instance.HideNote();
         }
     }
 
@@ -29,6 +31,8 @@ public class NoteInteract : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             GameManager.Instance.hasReadNote = true;
+
+            UIManager.Instance.HideInteraction();
 
             UIManager.Instance.ShowNote("You found the note!");
             Debug.Log("You found the note!");
