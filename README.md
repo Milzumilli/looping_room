@@ -1,0 +1,1 @@
+Tyttö liikkuu huoneessa. Kun hän menee ovesta, loop vaihtuu. Tavarat vaihtuu huoneessa osittain, tai kokonaan. Looppeja tehdään ainakin neljä. Tehdään musiikkia, valoja. Lampun pitäisi tummua ja taaa vaalistua kun tyttö menee kohdalla. Kirjeen/ noten kohdalla, tyttö lukee kirjeen E kirjaimella. E kirjaimella myös noukitaan avain ja mennään ovesta. 
