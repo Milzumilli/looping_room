@@ -44,6 +44,7 @@ public class DoorInteract : MonoBehaviour, IInteractable
         }
 
         UIManager.Instance.HideInteraction();
+        UIManager.Instance.HideNote();
 
         Debug.Log("Door opened – going to next loop!");
 
