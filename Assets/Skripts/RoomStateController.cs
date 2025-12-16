@@ -82,6 +82,11 @@ public class RoomStateController : MonoBehaviour
             else
                 SetFinalLoopText("");
         }
+        var door = Object.FindFirstObjectByType<DoorInteract>();
+        if (door != null)
+        {
+            door.OnLoopChanged();
+        }
 
     }
 

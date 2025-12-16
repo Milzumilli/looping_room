@@ -5,10 +5,24 @@ using UnityEngine;
 public class DoorInteract : MonoBehaviour, IInteractable
 {
     private bool playerInRange = false;
+    private bool usedThisVisit = false;
+    
+    private void ResetUsed()
+            {
+        usedThisVisit = false;
+    }
+
+    public void OnLoopChanged()
+    {
+        usedThisVisit = false;
+        playerInRange = false ;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        
 
         playerInRange = true;
 
@@ -30,36 +44,31 @@ public class DoorInteract : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (!playerInRange) return;
+        if (usedThisVisit) return;
 
-        if (!GameManager.Instance.hasKey)
+        if (GameManager.Instance.currentLoop == 0
+           && !GameManager.Instance.hasKey)
+            if (!GameManager.Instance.hasKey)
         {
             UIManager.Instance.ShowInteraction("Door is locked. Find a key");
-            Debug.Log("Door locked. Find a key");
             return;
         }
 
+        usedThisVisit = true;
 
         UIManager.Instance.HideInteraction();
         UIManager.Instance.HideNote();
 
-        Debug.Log("Door opened – going to next loop!");
-
-        if (GameManager.Instance.currentLoop < 4)  // 0,1,2,3,4 → max 4 eri huonetta
-        {
+        if (GameManager.Instance.currentLoop < 4)
 
             GameManager.Instance.currentLoop++;
+        var controller = Object.FindFirstObjectByType<RoomStateController>();
+        if (controller != null) 
+            controller.ApplyLoop(GameManager.Instance.currentLoop);
+        playerInRange = false;
+        usedThisVisit = false;
 
-            var controller =
-            Object.FindFirstObjectByType<RoomStateController>();
-            if (controller != null)
-            {
-                controller.ApplyLoop(GameManager.Instance.currentLoop);
-            }
 
-        }
-        else
-        {
-            Debug.LogError("RoomStateController not found");
-        }
     }
 }
