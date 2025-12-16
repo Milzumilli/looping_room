@@ -11,19 +11,26 @@ public class RoomStateController : MonoBehaviour
     [Header("Loop 2 Objects (more changes)")]
     public GameObject[] loop2Objects;
 
-    [Header("Loop 3 Objects (final room)")]
+    [Header("Loop 3 Objects (one more change)")]
     public GameObject[] loop3Objects;
+
+    [Header("Loop 4 Objects (final room)")]
+    public GameObject[] loop4Objects;
 
     private void Start()
     {
-        int loop = GameManager.Instance.currentLoop;
-        Debug.Log("RoomStateController Start ñ loop = " + loop);
+        ApplyLoop(GameManager.Instance.currentLoop);
+    }
+
+    public void ApplyLoop (int loop)
+    {
 
         // piilotetaan kaikki aluksi
         SetActiveForArray(loop0Objects, false);
         SetActiveForArray(loop1Objects, false);
         SetActiveForArray(loop2Objects, false);
         SetActiveForArray(loop3Objects, false);
+        SetActiveForArray(loop4Objects, false);
 
         // n‰ytet‰‰n vain oikean loopin tavarat
         if (loop <= 0)
@@ -38,9 +45,17 @@ public class RoomStateController : MonoBehaviour
         {
             SetActiveForArray(loop2Objects, true);
         }
-        else // loop >= 3
+        else if (loop == 3)
         {
             SetActiveForArray(loop3Objects, true);
+        }
+        else if (loop == 4)
+        {
+            SetActiveForArray(loop4Objects, true);
+        }
+        else // loop >= 4
+        {
+            SetActiveForArray(loop4Objects, true);
             Debug.Log("FINAL LOOP REACHED ó No more changes!");
         }
     }
@@ -48,6 +63,8 @@ public class RoomStateController : MonoBehaviour
 
     private void SetActiveForArray(GameObject[] objects, bool active)
     {
+        if (objects == null) return;
+        
         foreach (GameObject obj in objects)
         {
             if (obj != null)

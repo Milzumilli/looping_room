@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class DoorInteract : MonoBehaviour, IInteractable
 {
@@ -24,18 +26,11 @@ public class DoorInteract : MonoBehaviour, IInteractable
         UIManager.Instance.HideInteraction();
     }
 
-    private void Update()
-    {
-        if (!playerInRange) return;
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
-    }
+    
 
     public void Interact()
     {
+
         if (!GameManager.Instance.hasKey)
         {
             UIManager.Instance.ShowInteraction("Door is locked. Find a key");
@@ -43,19 +38,28 @@ public class DoorInteract : MonoBehaviour, IInteractable
             return;
         }
 
+
         UIManager.Instance.HideInteraction();
         UIManager.Instance.HideNote();
 
         Debug.Log("Door opened – going to next loop!");
 
-        if (GameManager.Instance.currentLoop < 4)  // 0,1,2,3 → max 4 eri huonetta
+        if (GameManager.Instance.currentLoop < 4)  // 0,1,2,3,4 → max 4 eri huonetta
         {
+
             GameManager.Instance.currentLoop++;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("RoomScene");
+
+            var controller =
+            Object.FindFirstObjectByType<RoomStateController>();
+            if (controller != null)
+            {
+                controller.ApplyLoop(GameManager.Instance.currentLoop);
+            }
+
         }
         else
         {
-            Debug.Log("FINAL LOOP REACHED — No more changes!");
+            Debug.LogError("RoomStateController not found");
         }
     }
 }
