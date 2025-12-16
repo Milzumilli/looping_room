@@ -71,6 +71,7 @@
     <Compile Include="Assets\Skripts\NoteInteract.cs" />
     <Compile Include="Assets\Skripts\PlayerMovement2D.cs" />
     <Compile Include="Assets\Skripts\GameManager.cs" />
+    <Compile Include="Assets\Skripts\FadeInText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
