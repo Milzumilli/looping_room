@@ -3,14 +3,28 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     private IInteractable currentInteractable;
+    private Collider2D currentTrigger;
 
     void Update()
     {
-        if (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
+        if (currentTrigger != null)
+
+            currentInteractable = currentTrigger.GetComponent<IInteractable>();
+
+        else currentInteractable = null;
+        
+        if    (currentInteractable != null && Input.GetKeyDown(KeyCode.E))
         {
             currentInteractable.Interact();
+
+            {
+                // Piilota "Press E" UI-teksti interaktion jälkeen
+                currentInteractable = null;
+               
+            }
         }
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -19,6 +33,7 @@ public class PlayerInteract : MonoBehaviour
         {
             currentInteractable = interactable;
             // Tänne voit lisätä UI-tekstin: "Press E"
+            currentTrigger = other;
         }
     }
 
@@ -29,6 +44,7 @@ public class PlayerInteract : MonoBehaviour
         {
             currentInteractable = null;
             // Piilota "Press E" UI-teksti
+            currentTrigger = null;
         }
     }
 }

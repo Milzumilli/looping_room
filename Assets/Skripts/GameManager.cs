@@ -27,6 +27,22 @@ public class GameManager : MonoBehaviour
         currentLoop = 0;
         PlayerPrefs.SetInt("LoopNumber", currentLoop);
     }
+    public void GoToNextLoop()
+    {
+        if (currentLoop < 4)
+            currentLoop++;
+
+            PlayerPrefs.SetInt("LoopNumber", currentLoop);
+        
+            Debug.Log("Next loop: " + currentLoop);
+
+            var room = FindObjectOfType<RoomStateController>();
+        
+        if (room != null)
+        
+            room.ApplyLoop(currentLoop);
+        }
+    }
 
 
-}
+
