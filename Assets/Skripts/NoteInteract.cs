@@ -34,7 +34,7 @@ public class NoteInteract : MonoBehaviour
 
             UIManager.Instance.HideInteraction();
 
-            UIManager.Instance.ShowNote("You found the note!");
+            UIManager.Instance.ShowNote("You found the note! the next loop will be different. Dont trust what you see");
             Debug.Log("You found the note!");
         }
     }

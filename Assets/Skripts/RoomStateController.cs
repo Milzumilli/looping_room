@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class RoomStateController : MonoBehaviour
 {
@@ -17,13 +18,24 @@ public class RoomStateController : MonoBehaviour
     [Header("Loop 4 Objects (final room)")]
     public GameObject[] loop4Objects;
 
+    [Header("Final loop")]
+    public GameObject finalLoopText;
+
+    [TextArea]
+    public string finalLoopMessage = "There is no next loop, you already left.";
+
+
+
     private void Start()
     {
+
         ApplyLoop(GameManager.Instance.currentLoop);
     }
 
-    public void ApplyLoop (int loop)
+    public void ApplyLoop(int loop)
     {
+        Debug.Log("ApplyLoop called, loop = " + loop);
+
 
         // piilotetaan kaikki aluksi
         SetActiveForArray(loop0Objects, false);
@@ -58,6 +70,36 @@ public class RoomStateController : MonoBehaviour
             SetActiveForArray(loop4Objects, true);
             Debug.Log("FINAL LOOP REACHED — No more changes!");
         }
+
+
+        if (finalLoopText != null)
+        {
+            bool showFinal = (loop == 4);
+            finalLoopText.SetActive(showFinal);
+
+            if (showFinal)
+                SetFinalLoopText(finalLoopMessage);
+            else
+                SetFinalLoopText("");
+        }
+
+    }
+
+    private void SetFinalLoopText(string msg)
+    {
+        if (finalLoopText == null) return;
+
+        TMP_Text tmp = finalLoopText.GetComponent<TMP_Text>();
+        if (tmp == null)
+            tmp = finalLoopText.GetComponentInChildren<TMP_Text>(true);
+
+        if (tmp == null) return;
+
+        tmp.text = msg;
+
+        var c = tmp.color;
+        c.a = 1f;
+        tmp.color = c;
     }
 
 

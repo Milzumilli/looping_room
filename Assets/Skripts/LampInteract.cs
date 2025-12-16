@@ -1,23 +1,44 @@
 using UnityEngine;
 
-public class LampInteract : MonoBehaviour
+public class LampInteract : MonoBehaviour, IInteractable
 {
-    SpriteRenderer sr;
-    public Color offColor = new Color(0.3f, 0.3f, 0.3f);
-    Color original;
+    private SpriteRenderer sr;
 
-    private void Start()
+    [Header("Lamp colors")]
+    public Color offColor = new Color(0.3f, 0.3f, 0.3f);
+    private Color original;
+    private bool isOff;
+
+    private bool playerInRange;
+
+    private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         original = sr.color;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Interact()
     {
-        if (collision.CompareTag("Player"))
-        {
-            if (sr.color == original) sr.color = offColor;
-            else sr.color = original;
-        }
+        if (!playerInRange) return;
+
+        isOff = !isOff;
+        sr.color = isOff ? offColor : original;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        playerInRange = true;
+        UIManager.Instance.ShowInteraction("Press E to turn of the lamp / turn on the lamp");
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        playerInRange = false;
+        UIManager.Instance.HideInteraction();
     }
 }
+
