@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         
             Debug.Log("Next loop: " + currentLoop);
 
-            var room = FindObjectOfType<RoomStateController>();
+            var room = FindFirstObjectByType<RoomStateController>();
         
         if (room != null)
         
