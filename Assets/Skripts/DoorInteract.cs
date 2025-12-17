@@ -1,12 +1,21 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoorInteract : MonoBehaviour, IInteractable
 {
+    public AudioClip doorOpenSound;
+    private AudioSource audioSource;
     private bool playerInRange = false;
     private bool usedThisVisit = false;
-    
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+    }
+
     private void ResetUsed()
             {
         usedThisVisit = false;
@@ -44,6 +53,7 @@ public class DoorInteract : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        UnityEngine.Debug.Log("Interacting with door");
         if (!playerInRange) return;
         if (usedThisVisit) return;
 
@@ -54,6 +64,12 @@ public class DoorInteract : MonoBehaviour, IInteractable
             UIManager.Instance.ShowInteraction("Door is locked. Find a key");
             return;
         }
+
+        if (doorOpenSound != null)
+
+            audioSource.PlayOneShot(doorOpenSound);
+        else
+            UnityEngine.Debug.LogWarning("Door open sound is missing on DoorInteract!");
 
         usedThisVisit = true;
 
