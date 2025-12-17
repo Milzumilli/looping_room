@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Skripts\PlayerInteract.cs" />
+    <Compile Include="Assets\Skripts\AppleSound.cs" />
     <Compile Include="Assets\Skripts\RoomStateController.cs" />
     <Compile Include="Assets\Skripts\UIManager.cs" />
     <Compile Include="Assets\Skripts\AppleWarning.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\FW_MIHO\AniManagers.cs" />
     <Compile Include="Assets\Skripts\NoteInteract.cs" />
     <Compile Include="Assets\Skripts\PlayerMovement2D.cs" />
+    <Compile Include="Assets\Skripts\Tea.cs" />
     <Compile Include="Assets\Skripts\GameManager.cs" />
     <Compile Include="Assets\Skripts\FadeInText.cs" />
   </ItemGroup>
