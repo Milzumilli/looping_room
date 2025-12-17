@@ -87,6 +87,7 @@ public class RoomStateController : MonoBehaviour
         {
             door.OnLoopChanged();
         }
+       
 
     }
 
