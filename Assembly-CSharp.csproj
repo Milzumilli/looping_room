@@ -64,6 +64,7 @@
     <Compile Include="Assets\Skripts\PlayerInteract.cs" />
     <Compile Include="Assets\Skripts\RoomStateController.cs" />
     <Compile Include="Assets\Skripts\UIManager.cs" />
+    <Compile Include="Assets\Skripts\AppleWarning.cs" />
     <Compile Include="Assets\Skripts\DoorInteract.cs" />
     <Compile Include="Assets\Skripts\KeyInteract.cs" />
     <Compile Include="Assets\Skripts\LampInteract.cs" />
